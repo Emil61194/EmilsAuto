@@ -12,11 +12,16 @@ namespace EmilsAuto.Controllers
         {
             this.productRepository = productRepository;
         }
-
+        
         public IActionResult Index()
         {
             List<Cars> cars = productRepository.GetCars();
-            return View();
+            return View("BrowseCars");
         }
+    }
+
+    public class BrowseViewModel
+    {
+
     }
 }

@@ -34,11 +34,13 @@ namespace EmilsAuto.Components
                     Cars car = SqlLoader.MapDataRowToObject<Cars>(dr);
                     Models model = SqlLoader.MapDataRowToObject<Models>(dr);
                     Brands brand = SqlLoader.MapDataRowToObject<Brands>(dr);
+                    model.Brands = brand;
                     car.Model = model;
+                    cars.Add(car);
                 }
             }
 
-            throw new NotImplementedException();
+            return cars;
         }
     }
 }

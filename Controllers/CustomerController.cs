@@ -18,4 +18,9 @@ namespace EmilsAuto.Controllers
             return View();
         }
     }
+
+    public class CustomerViewModel
+    {
+
+    }
 }
