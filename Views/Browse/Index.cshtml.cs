@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EmilsAuto.Pages
+namespace EmilsAuto.Pages.Browse
 {
     public class IndexModel : PageModel
     {
@@ -14,7 +14,7 @@ namespace EmilsAuto.Pages
 
         public void OnGet()
         {
-
+            _logger.LogInformation("Hey There");
         }
     }
 }

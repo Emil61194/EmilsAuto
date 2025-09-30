@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EmilsAuto.Pages
+namespace EmilsAuto.Views.Privacy
 {
     public class PrivacyModel : PageModel
     {
