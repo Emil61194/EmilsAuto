@@ -1,4 +1,5 @@
 using EmilsAuto.Components;
+using EmilsAuto.Controllers;
 using EmilsAuto.Interfaces;
 
 namespace EmilsAuto
@@ -13,6 +14,7 @@ namespace EmilsAuto
             builder.Services.AddRazorPages();
 
             builder.Services.AddScoped<ISqlCustomer, SqlCustomer>();
+            builder.Services.AddScoped<IProducts, SqlProducts>();
 
             var app = builder.Build();
 

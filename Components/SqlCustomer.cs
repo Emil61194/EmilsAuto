@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using EmilsAuto.Helper;
 using EmilsAuto.Interfaces;
 using System.Data;
 using System.Data.SqlClient;
@@ -18,15 +19,14 @@ namespace EmilsAuto.Components
         public void GetCustomer(string firstName, string lastName = "")
         {
             string sql = "SELECT customerId FROM customers.customers WHERE UPPER(CAST(name as varchar)) = @name OR UPPER(CAST(lastName as varchar)) = @lastName";
-            
-            
+                     
             using IDbConnection db = dbConnection;
             var reader = db.ExecuteReader(sql, new
             {
                 name = firstName,
                 lastName
             });
-
+            
             DataTable tb = new DataTable();
             tb.Load(reader);
 
