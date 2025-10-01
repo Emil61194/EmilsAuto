@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseClasses\DatabaseClasses.csproj" />
+    <ProjectReference Include="..\ClassLibrary2\Database.csproj" />
   </ItemGroup>
 
 </Project>

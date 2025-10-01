@@ -1,39 +1,37 @@
 ﻿using Dapper;
+using DatabaseClasses.Interfaces;
 using EmilsAuto.Classes;
 using EmilsAuto.Helper;
 using EmilsAuto.Interfaces;
-using System.Data;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace EmilsAuto.Components
 {
     public class SqlProducts : IProducts
     {
-        private readonly IConfiguration config;
-        private readonly IDbConnection dbConnection;
-        public SqlProducts(IConfiguration config)
+        private readonly IDbHandler _dbHandler;
+
+        public SqlProducts(IDbHandler dbHandler)
         {
-            this.config = config;
-            dbConnection = new SqlConnection(config.GetConnectionString("DefaultConnection"));
+            _dbHandler = dbHandler;
         }
         public List<Car> GetCars()
         {
             string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId ORDER BY c.listingDate DESC";
 
-            using IDbConnection db = dbConnection;
-            var reader = db.ExecuteReader(sql);
-
-            DataTable tb = new DataTable();
-            tb.Load(reader);
+            //using IDbConnection db = dbConnection;
+            //var reader = db.ExecuteReader(sql);
+            var tb = _dbHandler.ExecuteReader(sql);
 
             List<Car> Car = new List<Car>();
             if (tb.Rows.Count > 0)
             {
                 foreach (DataRow row in tb.Rows) 
                 {
-                    Car car = SqlLoader.MapDataRowToObject<Car>(row);
-                    Model model = SqlLoader.MapDataRowToObject<Model>(row);
-                    Brand brand = SqlLoader.MapDataRowToObject<Brand>(row);
+                    Car car = SqlLoader.MapDataRowToObject<Car>(row, new());
+                    Model model = SqlLoader.MapDataRowToObject<Model>(row, new());
+                    Brand brand = SqlLoader.MapDataRowToObject<Brand>(row, new());
                     model.Brand = brand;
                     car.Model = model;
                     Car.Add(car);
@@ -46,20 +44,15 @@ namespace EmilsAuto.Components
         public Car GetCar(int productId)
         {
             string sql = "SELECT TOP 1 * FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId WHERE productId = @productId";
-
-            using IDbConnection db = dbConnection;
-            var reader = db.ExecuteReader(sql, new { productId = productId } );
-
-            DataTable tb = new DataTable();
-            tb.Load(reader);
+            DataTable tb = _dbHandler.ExecuteReader(sql, new { productId = productId });
 
             Car car = new Car();
             if (tb.Rows.Count > 0)
             {
                 DataRow row = tb.Rows[0];
-                car = SqlLoader.MapDataRowToObject<Car>(row);
-                Model model = SqlLoader.MapDataRowToObject<Model>(row);
-                Brand brand = SqlLoader.MapDataRowToObject<Brand>(row);
+                car = SqlLoader.MapDataRowToObject<Car>(row, new());
+                Model model = SqlLoader.MapDataRowToObject<Model>(row, new());
+                Brand brand = SqlLoader.MapDataRowToObject<Brand>(row, new());
                 model.Brand = brand;
                 car.Model = model;
             }
