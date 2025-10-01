@@ -1,10 +1,10 @@
 ﻿namespace EmilsAuto.Classes
 {
-    public class Brands
+    public class Brand
     {
         public int BrandId { get; set; }
-        //public Brands(int brandId) { this.BrandId = brandId; }
-        public string? Name { get; set; }
-        public string? Desc { get; set; }
+        //public Brand(int brandId) { this.BrandId = brandId; }
+        public string Name { get; set; }
+        public string Desc { get; set; }
     }
 }

@@ -16,9 +16,9 @@ namespace EmilsAuto.Components
             this.config = config;
             dbConnection = new SqlConnection(config.GetConnectionString("DefaultConnection"));
         }
-        public List<Cars> GetCars()
+        public List<Car> GetCar()
         {
-            string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.cars c\r\nINNER JOIN brand.models m on m.modelId = c.modelId\r\nINNER JOIN brand.brands b on b.brandId = m.brandId";
+            string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.Car c\r\nINNER JOIN brand.Model m on m.modelId = c.modelId\r\nINNER JOIN brand.Brand b on b.brandId = m.brandId ORDER BY c.listingDate DESC";
 
             using IDbConnection db = dbConnection;
             var reader = db.ExecuteReader(sql);
@@ -26,21 +26,26 @@ namespace EmilsAuto.Components
             DataTable tb = new DataTable();
             tb.Load(reader);
 
-            List<Cars> cars = new List<Cars>();
+            List<Car> Car = new List<Car>();
             if (tb.Rows.Count > 0)
             {
                 foreach (DataRow dr in tb.Rows) 
                 {
-                    Cars car = SqlLoader.MapDataRowToObject<Cars>(dr);
-                    Models model = SqlLoader.MapDataRowToObject<Models>(dr);
-                    Brands brand = SqlLoader.MapDataRowToObject<Brands>(dr);
-                    model.Brands = brand;
+                    Car car = SqlLoader.MapDataRowToObject<Car>(dr);
+                    Model model = SqlLoader.MapDataRowToObject<Model>(dr);
+                    Brand brand = SqlLoader.MapDataRowToObject<Brand>(dr);
+                    model.Brand = brand;
                     car.Model = model;
-                    cars.Add(car);
+                    Car.Add(car);
                 }
             }
 
-            return cars;
+            return Car;
+        }
+
+        public Car GetCar(int productId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

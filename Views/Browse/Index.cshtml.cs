@@ -14,7 +14,7 @@ namespace EmilsAuto.Pages.Browse
 
         public void OnGet()
         {
-            _logger.LogInformation("Hey There");
+            //_logger.LogInformation("Hey There");
         }
     }
 }

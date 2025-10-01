@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EmilsAuto.Pages.Home
+namespace EmilsAuto.Pages.Browse
 {
-    public class IndexModel : PageModel
+    public class SelectedCarModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public SelectedCarModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }

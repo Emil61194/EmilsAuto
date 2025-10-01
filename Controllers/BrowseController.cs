@@ -7,7 +7,7 @@ namespace EmilsAuto.Controllers
     public class BrowseController : Controller
     {
         private readonly IProducts productRepository;
-        
+
         public BrowseController(IProducts productRepository)
         {
             this.productRepository = productRepository;
@@ -15,13 +15,22 @@ namespace EmilsAuto.Controllers
 
         public IActionResult Index()
         {
-            List<Cars> cars = productRepository.GetCars();
-            return View();
+            BrowseViewModel viewModel = new BrowseViewModel();
+            viewModel.Car = productRepository.GetCar();
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult SelectCar([FromForm] int productId)
+        {
+            
+            return View("SelectedCar");
         }
     }
 
     public class BrowseViewModel
     {
-
+        public List<Car> Car;
     }
 }

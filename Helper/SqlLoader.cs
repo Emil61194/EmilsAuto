@@ -14,7 +14,7 @@ namespace EmilsAuto.Helper
                 if (row.Table.Columns.Contains(prop.Name) && row[prop.Name] != DBNull.Value)
                 {
                     try
-                    {
+                    {                        
                         var value = Convert.ChangeType(row[prop.Name], prop.PropertyType);
                         prop.SetValue(obj, value);
                     }
