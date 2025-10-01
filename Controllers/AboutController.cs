@@ -2,7 +2,7 @@
 
 namespace EmilsAuto.Controllers
 {
-    public class PrivacyController : Controller
+    public class AboutController : Controller
     {
         public IActionResult Index()
         {

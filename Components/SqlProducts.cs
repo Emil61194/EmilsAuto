@@ -16,7 +16,7 @@ namespace EmilsAuto.Components
             this.config = config;
             dbConnection = new SqlConnection(config.GetConnectionString("DefaultConnection"));
         }
-        public List<Car> GetCar()
+        public List<Car> GetCars()
         {
             string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId ORDER BY c.listingDate DESC";
 
@@ -29,11 +29,11 @@ namespace EmilsAuto.Components
             List<Car> Car = new List<Car>();
             if (tb.Rows.Count > 0)
             {
-                foreach (DataRow dr in tb.Rows) 
+                foreach (DataRow row in tb.Rows) 
                 {
-                    Car car = SqlLoader.MapDataRowToObject<Car>(dr);
-                    Model model = SqlLoader.MapDataRowToObject<Model>(dr);
-                    Brand brand = SqlLoader.MapDataRowToObject<Brand>(dr);
+                    Car car = SqlLoader.MapDataRowToObject<Car>(row);
+                    Model model = SqlLoader.MapDataRowToObject<Model>(row);
+                    Brand brand = SqlLoader.MapDataRowToObject<Brand>(row);
                     model.Brand = brand;
                     car.Model = model;
                     Car.Add(car);
@@ -45,7 +45,26 @@ namespace EmilsAuto.Components
 
         public Car GetCar(int productId)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT TOP 1 * FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId WHERE productId = @productId";
+
+            using IDbConnection db = dbConnection;
+            var reader = db.ExecuteReader(sql, new { productId = productId } );
+
+            DataTable tb = new DataTable();
+            tb.Load(reader);
+
+            Car car = new Car();
+            if (tb.Rows.Count > 0)
+            {
+                DataRow row = tb.Rows[0];
+                car = SqlLoader.MapDataRowToObject<Car>(row);
+                Model model = SqlLoader.MapDataRowToObject<Model>(row);
+                Brand brand = SqlLoader.MapDataRowToObject<Brand>(row);
+                model.Brand = brand;
+                car.Model = model;
+            }
+
+            return car;
         }
     }
 }

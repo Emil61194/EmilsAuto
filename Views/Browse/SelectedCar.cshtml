@@ -4,6 +4,17 @@
 	ViewData["Title"] = "Browse";
 }
 
-<div class="text-center">
-	<h1 class="display-4">VALGT BIL :)</h1>
-</div>
+
+@foreach (Classes.Car car in Model.Cars)
+{
+	string prefix = "-";
+	<section class="newscontent">
+		<div class="text-center">
+			<h1 class="display-4">@car.Model.Brand.Name @car.Model.ModelYear @car.Model.FuelType</h1>
+		</div>
+		<p>Kilometertal: @(car.KmDriven == 0 ? prefix : $"{car.KmDriven.ToString("N0", Model.nfi)} km")</p>
+		<p>Ydelse: @(car.Model.HorsePower == 0 ? prefix : $"{car.Model.HorsePower} hk")</p>
+		<p>Brændstofforbrug: @(car.Model.FuelConsumption == 0 ? prefix : $"{car.Model.FuelConsumption} km/l")</p>
+		<p>VIN: @(string.IsNullOrEmpty(car.Vin) ? prefix : car.Vin)</p>
+	</section>
+}

@@ -5,6 +5,6 @@ namespace EmilsAuto.Interfaces
     public interface IProducts
     {
         Car GetCar(int productId);
-        List<Car> GetCar();
+        List<Car> GetCars();
     }
 }

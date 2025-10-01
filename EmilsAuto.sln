@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmilsAuto", "EmilsAuto.csproj", "{9252E728-4F0E-4A69-B249-F00498AFBD5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseClasses", "..\DatabaseClasses\DatabaseClasses.csproj", "{C3B4B450-995E-463E-A136-774CFBDFD44B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9252E728-4F0E-4A69-B249-F00498AFBD5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9252E728-4F0E-4A69-B249-F00498AFBD5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9252E728-4F0E-4A69-B249-F00498AFBD5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B4B450-995E-463E-A136-774CFBDFD44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B4B450-995E-463E-A136-774CFBDFD44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B4B450-995E-463E-A136-774CFBDFD44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B4B450-995E-463E-A136-774CFBDFD44B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,9 @@
 using EmilsAuto.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+using System;
+using System.Globalization;
+
 namespace EmilsAuto.Controllers
 {
     public class BrowseController : Controller
@@ -13,24 +16,29 @@ namespace EmilsAuto.Controllers
             this.productRepository = productRepository;
         }
 
+        [HttpGet("browse")]
         public IActionResult Index()
         {
             BrowseViewModel viewModel = new BrowseViewModel();
-            viewModel.Car = productRepository.GetCar();
+            viewModel.Cars = productRepository.GetCars();
             return View(viewModel);
         }
 
 
-        [HttpPost]
-        public IActionResult SelectCar([FromForm] int productId)
+        [HttpGet("browse/car/{id}")]
+        public IActionResult SelectedCar(int id)
         {
-            
-            return View("SelectedCar");
+            BrowseViewModel viewModel = new BrowseViewModel();
+            List<Car> cars = new List<Car>();
+            cars.Add(productRepository.GetCar(id));
+            viewModel.Cars = cars;
+            return View(viewModel);
         }
     }
 
     public class BrowseViewModel
     {
-        public List<Car> Car;
+        public List<Car> Cars;
+        public NumberFormatInfo nfi = new CultureInfo("da-DK", false).NumberFormat;
     }
 }
