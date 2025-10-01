@@ -18,7 +18,7 @@ namespace EmilsAuto.Components
         }
         public List<Car> GetCar()
         {
-            string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.Car c\r\nINNER JOIN brand.Model m on m.modelId = c.modelId\r\nINNER JOIN brand.Brand b on b.brandId = m.brandId ORDER BY c.listingDate DESC";
+            string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId ORDER BY c.listingDate DESC";
 
             using IDbConnection db = dbConnection;
             var reader = db.ExecuteReader(sql);
