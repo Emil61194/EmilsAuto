@@ -18,7 +18,7 @@ namespace EmilsAuto.Components
         }
         public List<Car> GetCars()
         {
-            string sql = "SELECT TOP 25 c.productId, c.listingPrice, c.listingDate, c.modelId, m.modelYear, b.\"name\", m.fuelType FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId ORDER BY c.listingDate DESC";
+            string sql = "EXEC procedures.getAvaibleCars";
             var tb = _dbHandler.ExecuteReader(sql);
 
             List<Car> Car = new List<Car>();
@@ -40,7 +40,7 @@ namespace EmilsAuto.Components
 
         public Car GetCar(int productId)
         {
-            string sql = "SELECT TOP 1 * FROM products.Cars c\r\nINNER JOIN brand.Models m on m.modelId = c.modelId\r\nINNER JOIN brand.Brands b on b.brandId = m.brandId WHERE productId = @productId";
+            string sql = "SELECT TOP 1 * FROM views.CarInformation WHERE productId = @productId";
             DataTable tb = _dbHandler.ExecuteReader(sql, new { productId = productId });
 
             Car car = new Car();

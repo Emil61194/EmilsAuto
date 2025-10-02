@@ -7,17 +7,48 @@
 <div class="text-center">
 	<h1 class="display-4">Udvalg af biler</h1>
 </div>
-	
+
 <section class="newscontent">
 	@foreach (Classes.Car car in Model.Cars)
 	{
 		TimeSpan span = car.ListingDate.Subtract(DateTime.UtcNow);
 		<a class="flashnews" asp-action="SelectedCar" asp-controller="Browse" asp-route-id="@car.ProductId">
 			@* <button class="flashnews"> *@
-				<span>Lagt op @car.ListingDate.ToString("dd-MM-yyyy") </span>
-				<img src="placeholder.png">
-				<h2>@car.Model.Brand.Name @car.Model.ModelYear @car.Model.FuelType</h2>
+			<span>Lagt op @car.ListingDate.ToString("dd-MM-yyyy") </span>
+			@* <img src="placeholder.png"> *@
+			<h2>@car.Model.Brand.Name @car.Model.ModelYear @car.Model.FuelType</h2>
 			@* </button> *@
 		</a>
 	}
 </section>
+
+<style>
+	.pagination {
+		display: flex;
+		justify-content: center;
+		list-style: none;
+		padding: 0px;
+	}
+
+		.pagination li a {
+			display: block;
+			padding: 8px 12px;
+			text-decoration: none;
+			border: 1px solid gray;
+			color: black;
+			margin: 0 4px;
+			border-radius: 5px;
+		}
+</style>
+
+<ul class="pagination">
+	<li><a asp-action="Index" asp-controller="Browse" asp-route-id="1">&laquo;</a></li>
+	@for (int i = Model.pagination.CurrentPage; i < Model.pagination.CurrentPage+5; i++)
+	{
+		int pageNum = i;
+		if (Model.pagination.CurrentPage > 1) { pageNum--; }
+		if (pageNum > Model.pagination.maxPages){ break; }
+		<li><a asp-action="Index" asp-controller="Browse" asp-route-id="@pageNum">@pageNum</a></li>
+	}
+	<li><a asp-action="Index" asp-controller="Browse" asp-route-id="@Model.pagination.maxPages">&raquo;</a></li>
+</ul>

@@ -2,6 +2,7 @@ using DatabaseClasses.Data;
 using DatabaseClasses.Interfaces;
 using EmilsAuto.Components;
 using EmilsAuto.Controllers;
+using EmilsAuto.Helper;
 using EmilsAuto.Interfaces;
 
 namespace EmilsAuto
@@ -16,6 +17,8 @@ namespace EmilsAuto
             builder.Services.AddRazorPages();
 
             builder.Services.AddScoped<IDbHandler, DbHandler>();
+            builder.Services.AddScoped<IPagination, Pagination>();
+
             builder.Services.AddScoped<ISqlCustomer, SqlCustomer>();
             builder.Services.AddScoped<IProducts, SqlProducts>();
 

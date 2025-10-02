@@ -16,6 +16,8 @@
 		<p>Kilometertal: @(car.KmDriven == 0 ? prefix : $"{car.KmDriven.ToString("N0", Model.nfi)} km")</p>
 		<p>Ydelse: @(car.Model.HorsePower == 0 ? prefix : $"{car.Model.HorsePower} hk")</p>
 		<p>Brændstofforbrug: @(car.Model.FuelConsumption == 0 ? prefix : $"{car.Model.FuelConsumption} km/l")</p>
-		<p>VIN: @(string.IsNullOrEmpty(car.Vin) ? prefix : car.Vin)</p>
+		<p>Vin: @(string.IsNullOrEmpty(car.Vin) ? prefix : car.Vin)</p>
+
+		
 	</section>
 }
