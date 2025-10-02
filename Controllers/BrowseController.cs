@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using System;
 using System.Globalization;
+using System.Text.Json;
 
 namespace EmilsAuto.Controllers
 {
@@ -41,6 +42,36 @@ namespace EmilsAuto.Controllers
             cars.Add(productRepository.GetCar(id));
             viewModel.Cars = cars;
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddCarToBasket(int id)
+        {
+            var cookies = Request.Cookies["ShoppingBasket"];
+            List<int> basket;
+            if (cookies != null)
+            {
+                basket = JsonSerializer.Deserialize<List<int>>(cookies);
+            }
+            else
+            {
+                basket = new List<int>();
+            }
+
+            if (!basket.Contains(id))
+            {
+                basket.Add(id);
+
+                var options = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTimeOffset.UtcNow.AddDays(7)
+                };
+
+                Response.Cookies.Append("ShoppingBasket", JsonSerializer.Serialize(basket), options);
+            }
+
+            return RedirectToAction("SelectedCar", new { id = id });
         }
     }
 

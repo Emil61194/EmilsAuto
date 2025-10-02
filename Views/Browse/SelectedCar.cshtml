@@ -18,6 +18,9 @@
 		<p>Brændstofforbrug: @(car.Model.FuelConsumption == 0 ? prefix : $"{car.Model.FuelConsumption} km/l")</p>
 		<p>Vin: @(string.IsNullOrEmpty(car.Vin) ? prefix : car.Vin)</p>
 
-		
+		<form asp-action="addcartobasket" method="post">
+			<input type="hidden" name="id" value="@car.ProductId" />
+			<button type="submit" class="action-btn remove-btn">Tilføj til indkøbskurv</button>
+		</form>
 	</section>
 }

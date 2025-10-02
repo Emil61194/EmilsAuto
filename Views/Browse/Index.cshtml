@@ -1,7 +1,7 @@
 ﻿@* @page *@
 @model EmilsAuto.Controllers.BrowseViewModel;
 @{
-	ViewData["Title"] = "Browse";
+	ViewData["Title"] = "Find bil";
 }
 
 <div class="text-center">
@@ -13,33 +13,11 @@
 	{
 		TimeSpan span = car.ListingDate.Subtract(DateTime.UtcNow);
 		<a class="flashnews" asp-action="SelectedCar" asp-controller="Browse" asp-route-id="@car.ProductId">
-			@* <button class="flashnews"> *@
 			<span>Lagt op @car.ListingDate.ToString("dd-MM-yyyy") </span>
-			@* <img src="placeholder.png"> *@
 			<h2>@car.Model.Brand.Name @car.Model.ModelYear @car.Model.FuelType</h2>
-			@* </button> *@
 		</a>
 	}
 </section>
-
-<style>
-	.pagination {
-		display: flex;
-		justify-content: center;
-		list-style: none;
-		padding: 0px;
-	}
-
-		.pagination li a {
-			display: block;
-			padding: 8px 12px;
-			text-decoration: none;
-			border: 1px solid gray;
-			color: black;
-			margin: 0 4px;
-			border-radius: 5px;
-		}
-</style>
 
 <ul class="pagination">
 	<li><a asp-action="Index" asp-controller="Browse" asp-route-id="1">&laquo;</a></li>

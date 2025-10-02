@@ -1,0 +1,20 @@
+﻿@model EmilsAuto.Controllers.ShoppingBasketViewModel
+@{
+    ViewData["Title"] = "Indkøbskurv";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Færdiggør din bestilling</h1>
+    <p>Alle køb over 1.000.000 DKK får gratis fragt</p>
+</div>
+
+<section class="newscontent">
+	@foreach (Classes.Car car in Model.Cars)
+	{
+		TimeSpan span = car.ListingDate.Subtract(DateTime.UtcNow);
+		<a class="flashnews" asp-action="SelectedCar" asp-controller="Browse" asp-route-id="@car.ProductId">
+			<span>Lagt op @car.ListingDate.ToString("dd-MM-yyyy") </span>
+			<h2>@car.Model.Brand.Name @car.Model.ModelYear @car.Model.FuelType</h2>
+		</a>
+	}
+</section>
