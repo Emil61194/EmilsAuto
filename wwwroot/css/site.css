@@ -26,13 +26,15 @@ body {
     text-align: left;
     border-style: solid;
     border-radius: .3vw .3vw;
-    background-color: var(--news-color);
+    background-color: white;
     margin-left: 5%;
     margin-right: 5%;
     padding: 1% 2% 1%;
     font-size: 0.8rem;
     width: 80vw;
-    transition: background-color 0.25s, color 0.25s;
+    color: black;
+    transition: background-color 0.35s, color 0.35s;
+    text-decoration: none;
 }
 
 .flashnews img {

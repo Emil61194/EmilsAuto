@@ -7,17 +7,17 @@
 <div class="text-center">
 	<h1 class="display-4">Udvalg af biler</h1>
 </div>
-
+	
 <section class="newscontent">
 	@foreach (Classes.Car car in Model.Cars)
 	{
 		TimeSpan span = car.ListingDate.Subtract(DateTime.UtcNow);
-		<a asp-action="SelectedCar" asp-controller="Browse" asp-route-id="@car.ProductId">
-			<button class="flashnews">
+		<a class="flashnews" asp-action="SelectedCar" asp-controller="Browse" asp-route-id="@car.ProductId">
+			@* <button class="flashnews"> *@
 				<span>Lagt op @car.ListingDate.ToString("dd-MM-yyyy") </span>
 				<img src="placeholder.png">
 				<h2>@car.Model.Brand.Name @car.Model.ModelYear @car.Model.FuelType</h2>
-			</button>
+			@* </button> *@
 		</a>
 	}
 </section>
